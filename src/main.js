@@ -18,6 +18,28 @@ const todos = [
 const ulElement = document.querySelector( "ul" )
 const inputElement = document.querySelector( "input" )
 const buttonElement = document.querySelector( "button" )
+const themeToggle = document.querySelector( ".theme-toggle" )
+
+const currentTheme = localStorage.getItem( "theme" ) || "light"
+document.documentElement.setAttribute( "data-theme", currentTheme )
+
+themeToggle.onclick = () => {
+	const theme = document.documentElement.getAttribute( "data-theme" )
+	const newTheme = theme === "dark" ? "light" : "dark"
+	document.documentElement.setAttribute( "data-theme", newTheme )
+	localStorage.setItem( "theme", newTheme )
+	themeToggle.textContent = newTheme === "dark" ? "☀️" : "🌙"
+}
+
+themeToggle.textContent = currentTheme === "dark" ? "☀️" : "🌙"
+
+inputElement.onkeyup = e => {
+
+	if ( e.code === "Enter" ) {
+
+		createTodoItem( inputElement.value, false )
+	}
+}
 
 buttonElement.onclick = () => {
 
@@ -31,32 +53,24 @@ for ( const todo of todos ) {
 
 function createTodoItem( title, completed ) {
 
-	const liElement = document.createElement( "li" )
-	const titleElement = document.createElement( "span" )
+	if ( typeof title === "string" && title.trim().length > 0 ) {
 
-	liElement.onclick = () => liElement.classList.toggle( "completed" )
-	titleElement.className = "title"
-	liElement.className = completed ? "completed" : ""
+		const liElement = document.createElement( "li" )
+		const checkboxElement = document.createElement( "div" )
+		const titleElement = document.createElement( "span" )
 
-	liElement.appendChild( titleElement )
+		liElement.onclick = () => liElement.classList.toggle( "completed" )
+		checkboxElement.className = "todo-checkbox"
+		titleElement.className = "todo-text"
+		liElement.className = completed ? "completed" : ""
 
-	titleElement.textContent = title
+		liElement.appendChild( checkboxElement )
+		liElement.appendChild( titleElement )
 
-	ulElement.appendChild( liElement )
+		titleElement.textContent = title
+
+		ulElement.appendChild( liElement )
+
+		inputElement.value = ""
+	}
 }
-
-// TERNARY OPERATOR
-
-// const age = 14
-
-// console.log( age > 14 ? "OK" : 20 > 10 ? "A" : "B" )
-// console.log( age > 14 ? "OK" : 20 > 10 ? "A" : "B" )
-
-// if ( age > 14 ) {
-
-// 	console.log( "OK" )
-// }
-// else {
-
-// 	console.log( "NOT" )
-// }

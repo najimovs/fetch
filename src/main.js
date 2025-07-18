@@ -16,23 +16,31 @@ const todos = [
 ]
 
 const ulElement = document.querySelector( "ul" )
+const inputElement = document.querySelector( "input" )
+const buttonElement = document.querySelector( "button" )
+
+buttonElement.onclick = () => {
+
+	createTodoItem( inputElement.value, false )
+}
 
 for ( const todo of todos ) {
+
+	createTodoItem( todo.title, todo.completed )
+}
+
+function createTodoItem( title, completed ) {
 
 	const liElement = document.createElement( "li" )
 	const titleElement = document.createElement( "span" )
 
+	liElement.onclick = () => liElement.classList.toggle( "completed" )
 	titleElement.className = "title"
-	// liElement.className = todo.completed ? "completed" : ""
-
-	if ( todo.completed ) {
-
-		liElement.classList.add( "completed" )
-	}
+	liElement.className = completed ? "completed" : ""
 
 	liElement.appendChild( titleElement )
 
-	titleElement.textContent = todo.title
+	titleElement.textContent = title
 
 	ulElement.appendChild( liElement )
 }

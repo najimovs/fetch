@@ -2,6 +2,7 @@
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	user-select: none;
 }
 
 #app {
@@ -24,6 +25,7 @@ ul li {
 	gap: 1rem;
 	border: 1pt solid black;
 	padding: 0.5rem 1rem;
+	cursor: pointer;
 }
 
 .completed span {

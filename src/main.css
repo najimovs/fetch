@@ -1,0 +1,31 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+#app {
+	min-height: 100vh;
+	flex-direction: column;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+ul {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
+ul li {
+	display: flex;
+	align-items: center;
+	gap: 1rem;
+	border: 1pt solid black;
+	padding: 0.5rem 1rem;
+}
+
+.completed span {
+	text-decoration: line-through;
+}
